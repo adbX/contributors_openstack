@@ -20,9 +20,12 @@ url=f"https://github.com/openstack/nova/graphs/contributors?from={range_start}&t
 print("Link being scrapped to view contributions: ", url)
 
 # Setting up headless webdriver
-chromeOptions = Options()
-chromeOptions.headless = True
-driver = webdriver.Chrome(options=chromeOptions)
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--disable-extensions')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(options=chrome_options)
 driver.get(url)
 
 # Wait till contributions are loaded and save to html file
